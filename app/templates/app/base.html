@@ -13,25 +13,36 @@
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
     
 
-    <title> Dairy Products | {% block tittle %}{% endblock tittle %}</title>
+    <title> Dairy Products | {% block title %}{% endblock title %}</title>
 </head>
 <body>
     
  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+
+
+    <a class="navbar-brand" href="/">
         <img src="{% static "app/images/Neel.png" %}" width="70" height="70"/>
     </a>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+      <!-- LEFT SIDE -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item dropdown">
+
+
+        <li class="dropdown-menu">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Products
           </a>
@@ -46,6 +57,8 @@
               <li><a class="dropdown-item" href="{% url 'category' 'IC' %}">Ice-creams</a></li>
           </ul>
         </li>
+        {% endif %}
+
         <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'about' %}">About Us</a>
         </li>
@@ -53,13 +66,19 @@
             <a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a>
         </li>
       </ul>
+
+
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
+     
 
+    <!-- RIGHT SIDE -->
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      {% if user.is_authenticated %}
         <li class="nav-item dropdown mx-2">
           <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lulu Mvumbi</a>
           <ul class="dropdown-menu" aria-labelledby="profileDropdown">
@@ -69,12 +88,14 @@
               <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </li>
+
+        
         <li class="nav-item mx-2">  
             <a href="#" class="nav-link text-white">Cart 4</a> 
         </li> 
-        <li class="nav-item mx-2">  
-            <a href="#" class="nav-link text-white">Wishlist 4</a> 
-        </li>
+
+
+        
         {% else %}
         <li class="nav-item mx-2">  
             <a href="{% url 'login' %}" class="nav-link text-white">Login</a> 
@@ -82,8 +103,11 @@
         <li class="nav-item mx-2">  
             <a href="{% url 'customerregistration' %}" class="nav-link text-white">Registration</a> 
         </li>   
-       {% endif %}               
+       {% endif %}
+       
+       
     </ul>
+
 </nav>   
 
 {% block banner-slider %}{% endblock banner-slider %}
